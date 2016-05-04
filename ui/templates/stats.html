@@ -1,0 +1,35 @@
+<div ng-include = "'navigation.html'"></div>
+
+<div class="col-md-6 col-md-offset-3" id="stats-heading">
+    <h1>Stats</h1>
+    <p class="box-description">Enter your favorite city to see a word cloud based on the most popular categories.</p>
+</div>
+
+  <div class="col-lg-4 col-md-offset-4" angucomplete-alt id="stats-search-bar"
+  placeholder="Type a city name"
+  maxlength="50"
+  pause="100"
+  selected-object="selectedCity"
+  local-data="cities"
+  search-fields="name"
+  title-field="name"
+  minlength="1"
+  input-class="form-control form-control-small"
+  match-class="highlight"></div>
+
+<div class="spinner"  id="stats-spinner" ng-if = "processing">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>
+
+<div class="container box col-md-8 col-md-offset-2" id="word-cloud">
+<div ></div>
+
+</div>
+
+<div class="container box2 col-md-8 col-md-offset-2" >
+<div ></div>
+
+</div>
+

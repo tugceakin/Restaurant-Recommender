@@ -1,0 +1,19 @@
+
+<div class="login-page" ng-hide="processing">
+  <div class="form">
+    <form class="login-form" ng-submit="signin(params)">
+      <input type="text" placeholder="username" ng-model="params.username" required/>
+      <input type="password" placeholder="password" ng-model="params.password" require/>
+      <button>login</button>
+      <p class="message">Not registered? <a href="#/register">Create an account</a></p>
+    </form>
+    <div ng-show="errorLogin" class="alert alert-danger">Username and password invalid. Please enter correct data!</div>
+  </div>
+</div>
+
+
+<div class="spinner" ng-if="processing">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>

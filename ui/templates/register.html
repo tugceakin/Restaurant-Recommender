@@ -1,0 +1,31 @@
+
+<!--     <div class="registeration-form-cls">
+        <div ng-show="SuccessRegister" class="success-message">Registration Sucessful!</div>
+    	<form class="navbar-form" role="login" ng-submit="register(params)">
+            <div class="input-group login-input">
+                <input type="text" class="form-control" placeholder="username" ng-model="params.username" required><br /><br />
+                <input type="password" class="form-control" placeholder="password" ng-model="params.password" required><br /><br />
+                <input type="text" class="form-control" placeholder="Email Id" ng-model="params.email" required><br /><br />
+                <input type="text" class="form-control" placeholder="Address" ng-model="params.address" required=""><br /><br />
+                <input type="text" class="form-control" placeholder="city" ng-model="params.city" required=""><br /><br />
+                    <button class="btn btn-default" type="submit">Register</button>
+            </div>
+        </form>
+    </div> -->
+
+<div class="register-page">
+  <div class="form">
+    <div class="alert alert-success" ng-show="SuccessRegister">
+      Registration Sucessful! <a href="#/login">Click here to login.</a>
+    </div>
+    <form class="register-form" ng-submit="register(params)">
+      <input type="text" placeholder="username" ng-model="params.username" required/>
+       <input type="text" placeholder="email" ng-model="params.email" required/>
+       <input type="password" placeholder="password" ng-model="params.password" require/>
+      <input type="text" placeholder="address" ng-model="params.address" required/>
+      <button>register</button>
+      <p class="message">Registered? <a href="#/login">Click here to login.</a></p>
+    </form>
+    <div ng-show="errorLogin" class="alert alert-danger">Username and password invalid. Please enter correct data!</div>
+  </div>
+</div>

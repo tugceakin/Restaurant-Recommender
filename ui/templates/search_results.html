@@ -1,0 +1,55 @@
+<div ng-include = "'navigation.html'"></div>
+
+<div class="container box col-md-6 col-md-offset-3" >
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Search Results</h1>
+ 				 <table class="table table-striped" id="search-results-table">
+ 				 	<tr>
+ 				 		<th class="center">
+				          <!-- <a href="" ng-click="sortType = 'name' ; sortReverse = !sortReverse"> -->
+				          <a href="" ng-click="sort('name')">
+				            Name
+				            <span ng-show="sortType == 'name'" class="fa fa-caret-down"></span>
+				          </a>
+				        </th>
+				        <th class="center">
+<!-- 				          <a href="" ng-click="sortType = 'city' ; sortReverse = !sortReverse">
+ -->				     <a href="" ng-click="sort('city')">
+
+				            City
+				            <span ng-show="sortType == 'city'" class="fa fa-caret-down"></span>
+				          </a>
+				        </th>
+				        <th class="center">
+<!-- 				          <a href="" ng-click="sortType = 'stars' ; sortReverse = !sortReverse">
+ -->				            
+				          <a href="" ng-click="sort('stars')">
+ 								Average Score
+				            <span ng-show="sortType == 'stars'" class="fa fa-caret-down"></span>
+				          </a>
+				        </th>
+ 				 		<th class="center">Rate</th>
+
+ 				 	</tr>
+<!-- 				    <tr ng-repeat="r in restaurants | orderBy:sortType:sortReverse">
+ -->				   
+					    <tr ng-repeat="r in restaurantsInCurrentPage">
+				        <td >{{r.name}}</td>
+				       	<td>{{r.city}}</td>
+				       	<td>{{r.stars}}</td>
+				       	<td>
+						    <uib-rating ng-model="rate" ng-click="rateRestaurant(rate, r)" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+<!-- 				       	<button class="btn btn-success" ng-click="rateRestaurant()">Rate</button>
+ -->				     </td>
+				    </tr>
+				</table>
+
+            <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage">
+        </uib-pagination>
+
+        </div>
+    </div>
+
+</div>
