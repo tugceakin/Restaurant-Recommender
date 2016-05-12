@@ -8,23 +8,19 @@
  				 <table class="table table-striped" id="search-results-table">
  				 	<tr>
  				 		<th class="center">
-				          <!-- <a href="" ng-click="sortType = 'name' ; sortReverse = !sortReverse"> -->
 				          <a href="" ng-click="sort('name')">
 				            Name
 				            <span ng-show="sortType == 'name'" class="fa fa-caret-down"></span>
 				          </a>
 				        </th>
 				        <th class="center">
-<!-- 				          <a href="" ng-click="sortType = 'city' ; sortReverse = !sortReverse">
- -->				     <a href="" ng-click="sort('city')">
+						  <a href="" ng-click="sort('city')">
 
 				            City
 				            <span ng-show="sortType == 'city'" class="fa fa-caret-down"></span>
 				          </a>
 				        </th>
-				        <th class="center">
-<!-- 				          <a href="" ng-click="sortType = 'stars' ; sortReverse = !sortReverse">
- -->				            
+				        <th class="center">			            
 				          <a href="" ng-click="sort('stars')">
  								Average Score
 				            <span ng-show="sortType == 'stars'" class="fa fa-caret-down"></span>
@@ -32,17 +28,14 @@
 				        </th>
  				 		<th class="center">Rate</th>
 
- 				 	</tr>
-<!-- 				    <tr ng-repeat="r in restaurants | orderBy:sortType:sortReverse">
- -->				   
+ 				 	</tr>			   
 					    <tr ng-repeat="r in restaurantsInCurrentPage">
 				        <td >{{r.name}}</td>
 				       	<td>{{r.city}}</td>
 				       	<td>{{r.stars}}</td>
 				       	<td>
 						    <uib-rating ng-model="rate" ng-click="rateRestaurant(rate, r)" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
-<!-- 				       	<button class="btn btn-success" ng-click="rateRestaurant()">Rate</button>
- -->				     </td>
+				     </td>
 				    </tr>
 				</table>
 
