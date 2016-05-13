@@ -24,8 +24,6 @@ recommenderApp.factory('d3Service', function() {
         .on("end", draw)
         .start();
 
-        console.log(w);
-
          function draw(words) {
               d3.select("#word-cloud").append("svg")
                   .attr("width", w)
@@ -69,10 +67,10 @@ recommenderApp.factory('d3Service', function() {
            .enter()
            .append("rect")
            .attr("y", function(d, i) {
-                return i * (h / keys.length);  //Bar width of 20 plus 1 for padding
+                return i * (h / keys.length);  
             })
            .attr("x", function(d) {
-                return 0;  //Height minus data value
+                return 0;  
             })
            .attr("height", h / keys.length - barPadding)
            .attr("width", function(d) {

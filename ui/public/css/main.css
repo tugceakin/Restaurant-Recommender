@@ -89,19 +89,6 @@ nav li a, #dropdown-menu{
     margin: 15px;
 }
 
-/*#activities-page-map {
-    float: left;
-}
-*/
-
-/*.rating-info-box {
-    margin-left: 3%;
-}*/
-
-/*#activity-page-map {
-    margin-right: 1%;
-}*/
-
 .menu-buttons a{
     color: #b91000;
     font-size: 1.5em;
@@ -309,9 +296,6 @@ a.menu-link:hover{
 .login-page .container .info span .fa, .register-page .container .info span .fa {
   color: #EF3B3A;
 }
-/*body {
-  background: teal;    
- }   */
 
 #navlist a:hover{
   cursor: pointer;
@@ -341,6 +325,10 @@ a.menu-link:hover{
 
 .pagination>li>a:hover, .pagination>li>span:hover {
   color: #b91000;
+}
+
+#map{
+  height: 350px;
 }
 
 

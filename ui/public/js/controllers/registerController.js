@@ -4,17 +4,6 @@ recommenderApp.controller('RegistrationController', ['$scope', '$http', '$locati
     $scope.unexpected_error = true;
     $scope.SuccessRegister = false;
     $scope.register = function() {
-        /*$scope.user_email = $scope.email;
-        $scope.user_type = $cookieStore.get("user_type");
-
-        if($scope.params.username == $scope.params.password){
-            $cookieStore.put('isAuth', true);
-            $cookieStore.put('userId', 'tUid1');
-            $location.path("/" + "main");
-        }
-        $location.path("/" + "login");*/
-        console.log("Registration Has been Successfully called");
-
         var url = "http://127.0.0.1:5000/registerUser"
         $http({
             method: 'POST',
@@ -25,14 +14,11 @@ recommenderApp.controller('RegistrationController', ['$scope', '$http', '$locati
             $scope.restaurants = data;
             console.log(data);
             $scope.SuccessRegister = true;
-            if(data === 'success'){
-                //$location.path("/" + "login");
-            }else{
+            if(data !== 'success'){
                 $location.path("/" + "register");
             }
             
         }).error(function(err){
-            console.log(err);
             $location.path("/" + "login");
         });
 

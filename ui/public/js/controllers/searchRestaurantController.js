@@ -6,7 +6,6 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
 
 
     if($cookieStore.get('isAuth')){
-        console.log("true");
         $scope.isAuth = true;
     }else{
         $scope.isAuth = false;
@@ -43,10 +42,9 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
 
 
       $scope.pageChanged = function() {
-        console.log('Page changed to: ' + $scope.currentPage);
-        console.log('sorting order ' + $scope.sortReverse);
-        $scope.restaurantsInCurrentPage = $scope.restaurants.slice(($scope.currentPage - 1) * $scope.itemsPerPage, ($scope.currentPage - 1) * $scope.itemsPerPage+ $scope.itemsPerPage);
-
+        var currentPage = $scope.currentPage;
+        var itemsPerPage = $scope.itemsPerPage;
+        $scope.restaurantsInCurrentPage = $scope.restaurants.slice((currentPage - 1) * itemsPerPage, (currentPage - 1) * itemsPerPage + itemsPerPage);
       };
 
       $scope.sort = function(sortType){
