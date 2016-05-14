@@ -29,8 +29,6 @@ recommenderApp.controller('ActivitiesController', function($scope, $interval, $h
                 }
             });
 
-        //recommendationsService.getRecommendations($scope);
-
         $scope.setMapCenter = function(r) {
             mapService.setMapCenter(r, infoWindow, $scope);
         }

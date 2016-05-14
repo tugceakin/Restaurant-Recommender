@@ -15,7 +15,6 @@ recommenderApp.controller('SignInController', [ '$scope', '$http', '$cookieStore
         $scope.uName = $scope.username;
         $scope.errorLogin = false;
         $scope.processing = true;
-        console.log($cookieStore);
 
 
         var url = "http://127.0.0.1:5000/authenticateUser"
@@ -33,7 +32,6 @@ recommenderApp.controller('SignInController', [ '$scope', '$http', '$cookieStore
                 console.log(data);
                 $cookieStore.put('isAuth', true);
                 $cookieStore.put('user_id', data[1]);
-                //document.getElementById("search-menu").style.display = "block";
                 $location.path("/activities");
             }else{
                 $scope.errorLogin = true;
