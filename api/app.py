@@ -7,12 +7,13 @@ import re
 import datetime
 import string
 import random
-from pymongo import MongoClient
 from bson import BSON
 from bson import json_util
-from recommendations import getRecommendations
+from recommendations import Recommendation
+from database import Database
 
-connection = MongoClient("mongodb://localhost:27017")
+d = Database()
+connection = d.getConnection()
 db = connection.recommender 
 reviews = db.reviews
 users = db.users
@@ -24,7 +25,8 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 @app.route('/getRecommendations', methods=['POST'])
 def get_recommendations():
     user_data = json.loads(request.data)
-    items = getRecommendations(user_data["user_id"])
+    recommendations = Recommendation()
+    items = recommendations.getRecommendations(user_data["user_id"])
     resp = make_response(json.dumps(list(items), sort_keys=True, indent=4, default=json_util.default))
     return resp
 
