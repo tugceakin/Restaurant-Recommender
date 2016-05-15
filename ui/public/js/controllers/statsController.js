@@ -2,18 +2,13 @@
  * Created by tugceakin on 4/25/16.
  */
 
-recommenderApp.controller('StatsController', function($scope, $http, d3Service) {
-    var url = "http://127.0.0.1:5000/getCities"
+recommenderApp.controller('StatsController', function($scope, $http, d3Service, statsService) {
 
     $scope.processing = false;
     $scope.cities = [];
     $scope.city;
-    $http({
-        method: 'POST',
-        url: url,
-        headers: {'Content-Type': 'application/json'},
-        data: {}
-    }).success(function (data) {
+    
+    statsService.getCities().success(function (data) {
         $scope.cities = data;
     });
 
@@ -21,17 +16,11 @@ recommenderApp.controller('StatsController', function($scope, $http, d3Service) 
       if (selected) {
         $scope.processing = true;
         d3.select("svg").remove();
-        var url = "http://127.0.0.1:5000/mostPopularCategoriesByCity"
-        $http({
-                method: 'POST',
-                url: url,
-                headers: {'Content-Type': 'application/json'},
-                data: {city: selected.title}
-            }).success(function (data) {
-                $scope.mostpop = data;
-                d3Service.drawWordCloud(data[selected.title]);
-                $scope.processing = false;
-        });
+        statsService.getMostPopularCategoriesByCity(selected.title).success(function (data) {
+                  $scope.mostpop = data;
+                  d3Service.drawWordCloud(data[selected.title]);
+                  $scope.processing = false;
+          });
       } 
     };
 
