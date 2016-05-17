@@ -13,11 +13,13 @@ A recommendation engine built using item-based collaborative filtering algorithm
 ## Installation
 
 Create a databse called recommender in mongodb.
+
 `use recommender`
 
-Download [collections](https://www.dropbox.com/sh/w0ot5q9640xw374/AADG6qHgqGjNt09YUshu2IWfa?dl=0)
+Download [collections](https://www.dropbox.com/sh/w0ot5q9640xw374/AADG6qHgqGjNt09YUshu2IWfa?dl=0).
 
 Import collections.
+
 `mongoimport --db recommender --collection JSON_FILE_NAME --file`
 
 Go to UI folder and install dependencies.
