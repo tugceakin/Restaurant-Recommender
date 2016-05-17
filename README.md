@@ -1,6 +1,6 @@
 # Restaurant-Recommender
 
-A recommendation engine built using item-based collaborative filtering algorithm. Datasets are provided by [Yelp](https://www.yelp.com/dataset_challenge).
+A recommendation engine that is built using item-based collaborative filtering algorithm. Datasets are provided by [Yelp](https://www.yelp.com/dataset_challenge).
 
 ## Prerequisities
 - Node.js
