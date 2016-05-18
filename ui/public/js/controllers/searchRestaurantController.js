@@ -2,7 +2,7 @@
  * Created by tugceakin on 4/15/16.
  */
 
-recommenderApp.controller('SearchRestaurantController', function($scope, $http, $location, $cookieStore, tableService) {
+recommenderApp.controller('SearchRestaurantController', function($scope, $http, $location, $cookieStore, tableService, restaurantService, config) {
 
 
     if($cookieStore.get('isAuth')){
@@ -53,8 +53,7 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
 
     $scope.searchRestaurant = function(name) {
         $scope.searching = true;
-        console.log(name);
-        var url = "http://127.0.0.1:5000/searchRestaurants"
+        var url = config.apiUrl + "/searchRestaurants"
         $http({
             method: 'POST',
             url: url,
@@ -74,24 +73,16 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
     };
 
     $scope.rateRestaurant = function(value, r) {
-        var url = "http://127.0.0.1:5000/rateRestaurant"
         $scope.rating = value;
         $scope.business_id = r.business_id;
         $scope.user_id = $cookieStore.get('user_id');
-        $http({
-            method: 'POST',
-            url: url,
-            headers: {'Content-Type': 'application/json'},
-            data: { stars: $scope.rating, user_id: $scope.user_id, business_id: $scope.business_id,
-                    latitude: r.latitude, longitude: r.longitude, city: r.city, full_address: r.full_address,
-                    categories: r.categories, name: r.name, state: r.state, average_rating: r.stars}
-        }).success(function (data) {
+        restaurantService.rateRestaurant($scope, r)
+        .success(function (data) {
             $scope.restaurants = data;
             $scope.data = data;
             console.log(data);
             $location.path("/");
         });
-    };
 
      $scope.logout = function() {
         console.log("clicked logout");
@@ -100,5 +91,6 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
         $location.path("/" + "login");
                // document.getElementById("search-menu").style.display = "none";
     };
+};
 
 });

@@ -1,7 +1,7 @@
-recommenderApp.factory('statsService', function($http) {
+recommenderApp.factory('statsService', function($http, config) {
    return {        
         getCities: function(){
-          var url = "http://127.0.0.1:5000/getCities";
+          var url = config.apiUrl  + "/getCities";
 
           return $http({
                       method: 'POST',
@@ -12,7 +12,7 @@ recommenderApp.factory('statsService', function($http) {
         },
 
         getMostPopularCategoriesByCity: function(title) {
-          var url = "http://127.0.0.1:5000/mostPopularCategoriesByCity";
+          var url = config.apiUrl  + "/mostPopularCategoriesByCity";
 
           return $http({
                   method: 'POST',

@@ -3,10 +3,10 @@
  */
 
 
-recommenderApp.controller('RecommendationsController', function($scope, $http, mapService, $cookieStore) {
+recommenderApp.controller('RecommendationsController', function($scope, $http, config, mapService, $cookieStore) {
     $scope.recommendations = [];
     $scope.user_id = $cookieStore.get('user_id');
-    var url = "http://127.0.0.1:5000/getRecommendations";
+    var url = config.apiUrl  + "/getRecommendations";
     var infoWindow = new google.maps.InfoWindow();
     $scope.recsReady = false;
 

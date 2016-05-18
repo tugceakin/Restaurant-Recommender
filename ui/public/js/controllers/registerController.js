@@ -1,10 +1,10 @@
-recommenderApp.controller('RegistrationController', ['$scope', '$http', '$location' ,'$cookieStore', function($scope, $http, $location, $cookieStore) {
-    
+recommenderApp.controller('RegistrationController', function($scope, $http, $location, $cookieStore, config) {
+   
     $scope.invalid_login = true;
     $scope.unexpected_error = true;
     $scope.SuccessRegister = false;
     $scope.register = function() {
-        var url = "http://127.0.0.1:5000/registerUser"
+        var url = config.apiUrl  + "/registerUser"
         $http({
             method: 'POST',
             url: url,
@@ -28,4 +28,4 @@ recommenderApp.controller('RegistrationController', ['$scope', '$http', '$locati
         $location.path("/" + "login");
     }
 
-}]);
+});

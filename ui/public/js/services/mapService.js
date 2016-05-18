@@ -42,7 +42,6 @@ recommenderApp.factory('mapService', function() {
         },
 
         setMapCenter: function(r, infoWindow, $scope){
-            console.log("set center")
             $scope.map.setCenter({lat: r.latitude, lng: r.longitude});
             infoWindow.setContent('<h4>' + r.name + '</h4>' + r.full_address);
             for(var i=0; i<$scope.markers.length; i++){

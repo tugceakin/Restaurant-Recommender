@@ -1,6 +1,5 @@
-recommenderApp.controller('SignInController', [ '$scope', '$http', '$cookieStore', '$location' ,function($scope, $http, $cookieStore, $location) {
+recommenderApp.controller('SignInController', function($scope, config, $http, $cookieStore, $location) {
 
-    console.log($cookieStore.get('isAuth') );
     if($cookieStore.get('isAuth') == true){
         $location.path( "/" );
     }
@@ -17,7 +16,7 @@ recommenderApp.controller('SignInController', [ '$scope', '$http', '$cookieStore
         $scope.processing = true;
 
 
-        var url = "http://127.0.0.1:5000/authenticateUser"
+        var url = config.apiUrl  + "/authenticateUser"
         $http({
             method: 'POST',
             url: url,
@@ -48,4 +47,4 @@ recommenderApp.controller('SignInController', [ '$scope', '$http', '$cookieStore
     $scope.register = function(){
         $location.path("/" + "register");
     }
-}]);
+});

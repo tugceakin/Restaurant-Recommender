@@ -1,7 +1,7 @@
-recommenderApp.factory('restaurantService', function($http) {
+recommenderApp.factory('restaurantService', function($http, config) {
    return {        
         getRatedRestaurants: function(user_id){
-        var url = "http://127.0.0.1:5000/getRatedRestaurants";
+        var url = config.apiUrl  + "/getRatedRestaurants";
 
           return $http({
                   method: 'POST',
@@ -11,14 +11,17 @@ recommenderApp.factory('restaurantService', function($http) {
               })
         },
 
-        rateRestaurant: function(rating, user_id, business_id) {
-          var url = "http://127.0.0.1:5000/rateRestaurant"
+        rateRestaurant: function($scope, r) {
+          var url = config.apiUrl + "/rateRestaurant"
 
           return $http({
                   method: 'POST',
                   url: url,
                   headers: {'Content-Type': 'application/json'},
-                  data: {rating: rating, user_id: user_id, business_id: business_id}
+                  data: { stars: $scope.rating, user_id: $scope.user_id, business_id: $scope.business_id,
+                    latitude: r.latitude, longitude: r.longitude, city: r.city, full_address: r.full_address,
+                    categories: r.categories, name: r.name, state: r.state, average_rating: r.stars}
+                    
               })
         }
    }
