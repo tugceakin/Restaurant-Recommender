@@ -18,6 +18,7 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
     $scope.max = 5;
     $scope.isReadonly = false;
     $scope.sortType     = 'name'; // set the default sort type
+    
     $scope.sortReverse  = false;  // set the default sort order
     $scope.hoveringOver = function(value) {
         $scope.overStar = value;
@@ -66,7 +67,6 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
                 return a.name.localeCompare(b.name);
             });
             $scope.restaurantsInCurrentPage = $scope.restaurants.slice(0, $scope.itemsPerPage);
-            // console.log(data);
             $scope.searching = false;
             $location.path("/" + "search_results");
         });
