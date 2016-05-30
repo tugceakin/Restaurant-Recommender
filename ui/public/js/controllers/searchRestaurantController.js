@@ -17,9 +17,9 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
     $scope.rate = 0;
     $scope.max = 5;
     $scope.isReadonly = false;
-    $scope.sortType     = 'name'; // set the default sort type
-    
+    $scope.sortType     = 'name'; // set the default sort type    
     $scope.sortReverse  = false;  // set the default sort order
+
     $scope.hoveringOver = function(value) {
         $scope.overStar = value;
     };
@@ -54,28 +54,22 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
 
     $scope.searchRestaurant = function(name) {
         $scope.searching = true;
-        var url = config.apiUrl + "/searchRestaurants"
-        $http({
-            method: 'POST',
-            url: url,
-            headers: {'Content-Type': 'application/json'},
-            data: {name: name}
-        }).success(function (data) {
-            $scope.restaurants = data;
-            $scope.totalItems = $scope.restaurants.length;
-            $scope.restaurants.sort(function(a, b) {
-                return a.name.localeCompare(b.name);
-            });
-            $scope.restaurantsInCurrentPage = $scope.restaurants.slice(0, $scope.itemsPerPage);
-            $scope.searching = false;
-            $location.path("/" + "search_results");
+
+        restaurantService.searchRestaurant(name)
+            .success(function (data) {
+                $scope.restaurants = data;
+                $scope.totalItems = $scope.restaurants.length;
+                $scope.restaurants.sort(function(a, b) {
+                    return a.name.localeCompare(b.name);
+                });
+                $scope.restaurantsInCurrentPage = $scope.restaurants.slice(0, $scope.itemsPerPage);
+                $scope.searching = false;
+                $location.path("/" + "search_results");
         });
     };
 
     $scope.rateRestaurant = function(value, r) {
         $scope.rating = value;
-        $scope.business_id = r.business_id;
-        $scope.user_id = $cookieStore.get('user_id');
         restaurantService.rateRestaurant($scope, r)
         .success(function (data) {
             $scope.restaurants = data;
@@ -84,12 +78,10 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
             $location.path("/");
         });
 
-     $scope.logout = function() {
+    $scope.logout = function() {
         console.log("clicked logout");
         $cookieStore.put('isAuth', false);
-        //$scope.isAuth = false;
         $location.path("/" + "login");
-               // document.getElementById("search-menu").style.display = "none";
     };
 };
 

@@ -23,6 +23,17 @@ recommenderApp.factory('restaurantService', function($http, config) {
                     categories: r.categories, name: r.name, state: r.state, average_rating: r.stars}
                     
               })
+        },
+
+        searchRestaurant: function(name){
+          var url = config.apiUrl + "/searchRestaurants"
+          
+          return $http({
+              method: 'POST',
+              url: url,
+              headers: {'Content-Type': 'application/json'},
+              data: {name: name}
+           })
         }
    }
 });
