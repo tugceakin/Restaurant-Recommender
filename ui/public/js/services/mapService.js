@@ -19,7 +19,6 @@ recommenderApp.factory('mapService', function() {
             });
 
             $scope.markers.push(marker);
-            console.log(marker);
         },
 
         drawMap: function(data, $scope){
@@ -37,7 +36,9 @@ recommenderApp.factory('mapService', function() {
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             };
 
-            $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            if(document.getElementById('map') != null){
+                $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            }
             $scope.markers = [];
         },
 

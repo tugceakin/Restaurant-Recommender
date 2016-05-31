@@ -30,6 +30,7 @@ module.exports = function(config) {
       'lib/d3/d3.min.js',
       'lib/d3-cloud/build/d3.layout.cloud.js',
       'lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
+      'http://maps.google.com/maps/api/js?libraries=places',
       'lib/ngmap/build/scripts/ng-map.min.js',
       'lib/angular-mocks/angular-mocks.js',
       '../node_modules/sinon/sinon-1.15.0.js',

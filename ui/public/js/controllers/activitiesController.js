@@ -7,20 +7,28 @@ recommenderApp.controller('ActivitiesController', function($scope, $interval, $h
             $location.path( "/login" );
         }
 
-        var infoWindow = new google.maps.InfoWindow();
+        var infoWindow;
         $scope.ratedRestaurants;
-        $scope.user_id = $cookieStore.get('user_id');
-        restaurantService.getRatedRestaurants($scope.user_id).success(function (data) {
-                $scope.ratedRestaurants = data;
-                mapService.drawMap(data, $scope);
-                if(data.length > 0){
+
+        $scope.getRatedRestaurants = function(){
+            $scope.user_id = $cookieStore.get('user_id');
+            infoWindow = new google.maps.InfoWindow();
+
+            restaurantService.getRatedRestaurants($scope.user_id)
+            .then(function (response) {
+                $scope.ratedRestaurants = response.data;
+                mapService.drawMap(response.data, $scope);
+                if(response.data.length > 0){
                     for (i = 0; i < $scope.ratedRestaurants.length; i++){
                         mapService.createMarker($scope.ratedRestaurants[i],infoWindow, $scope);
                     }
                 }else{
                     $scope.noRatings = true;
                 }
+            }, function (response) {
+                $scope.errorGetRatedRestaurants = 'ERROR';
             });
+        };
 
         $scope.setMapCenter = function(r) {
             mapService.setMapCenter(r, infoWindow, $scope);

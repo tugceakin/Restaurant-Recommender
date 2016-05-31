@@ -26,7 +26,7 @@ recommenderApp.controller('StatsController', function($scope, $http, d3Service, 
             $scope.processing = false; 
         }, function (response) {
             scope.errorDrawWordCloud = 'ERROR';
-         });
+        });
       } 
     };
 
