@@ -36,21 +36,21 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
     {stateOff: 'glyphicon-off'}];
 
 
-      $scope.viewby = 20;
-      $scope.currentPage = 1;
-      $scope.itemsPerPage = $scope.viewby;
-      $scope.maxSize = 5; //Number of pager buttons to show
+    $scope.viewby = 20;
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = $scope.viewby;
+    $scope.maxSize = 5; //Number of pager buttons to show
 
 
-      $scope.pageChanged = function() {
-        var currentPage = $scope.currentPage;
-        var itemsPerPage = $scope.itemsPerPage;
-        $scope.restaurantsInCurrentPage = $scope.restaurants.slice((currentPage - 1) * itemsPerPage, (currentPage - 1) * itemsPerPage + itemsPerPage);
-      };
+    $scope.pageChanged = function() {
+    var currentPage = $scope.currentPage;
+    var itemsPerPage = $scope.itemsPerPage;
+    $scope.restaurantsInCurrentPage = $scope.restaurants.slice((currentPage - 1) * itemsPerPage, (currentPage - 1) * itemsPerPage + itemsPerPage);
+    };
 
-      $scope.sort = function(sortType){
-        tableService.sort(sortType, $scope);
-      };
+    $scope.sort = function(sortType){
+    tableService.sort(sortType, $scope);
+    };
 
     $scope.searchRestaurant = function(name) {
         $scope.searching = true;
@@ -77,12 +77,12 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
             console.log(data);
             $location.path("/");
         });
+    };
 
     $scope.logout = function() {
         console.log("clicked logout");
         $cookieStore.put('isAuth', false);
         $location.path("/" + "login");
     };
-};
 
 });

@@ -1,25 +1,17 @@
-recommenderApp.controller('RegistrationController', function($scope, $http, $location, $cookieStore, config) {
+recommenderApp.controller('RegistrationController', function($scope, $http, $location, $cookieStore, config, authorizationService) {
    
-    $scope.invalid_login = true;
-    $scope.unexpected_error = true;
     $scope.SuccessRegister = false;
+    
     $scope.register = function() {
-        var url = config.apiUrl  + "/registerUser"
-        $http({
-            method: 'POST',
-            url: url,
-            headers: {'Content-Type': 'application/json'},
-            data: {name: $scope.params.username, password: $scope.params.password, email: $scope.params.email, address: $scope.params.address, city: $scope.params.city }
-        }).success(function (data) {
-            $scope.restaurants = data;
-            console.log(data);
+
+        authorizationService.register($scope.params)
+        .then(function (response) {
             $scope.SuccessRegister = true;
-            if(data !== 'success'){
+            if(response.data !== 'success'){
                 $location.path("/" + "register");
             }
-            
-        }).error(function(err){
-            $location.path("/" + "login");
+        }, function (response) {
+            $scope.registerError = true;
         });
 
     };
