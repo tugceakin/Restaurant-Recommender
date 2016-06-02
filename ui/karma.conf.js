@@ -33,6 +33,7 @@ module.exports = function(config) {
       'http://maps.google.com/maps/api/js?libraries=places',
       'lib/ngmap/build/scripts/ng-map.min.js',
       'lib/angular-mocks/angular-mocks.js',
+      'lib/satellizer/satellizer.min.js',
       '../node_modules/sinon/sinon-1.15.0.js',
       'js/**/*.js',
       '../tests/*.js'

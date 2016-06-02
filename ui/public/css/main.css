@@ -235,7 +235,7 @@ a.menu-link:hover{
   box-sizing: border-box;
   font-size: 14px;
 }
-.login-page form button, .register-page .form form button  {
+.login-page form button, .register-page .form form button{
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
@@ -250,7 +250,8 @@ a.menu-link:hover{
   cursor: pointer;
 }
 .login-page .form button:hover,.login-page .form button:active,.login-page .form button:focus,
-.register-page .form button:hover, .register-page .form button:active, .register-page .form button:focus {
+.register-page .form button:hover, .register-page .form button:active, .register-page .form button:focus,
+#google-login:hover, #google-login:focus {
   background: maroon;
 }
 .login-page .form .message, .register-page .form .message {
@@ -329,6 +330,11 @@ a.menu-link:hover{
 
 #map{
   height: 350px;
+}
+
+#google-login{
+  margin-top: 10px;
+  background: tomato;
 }
 
 

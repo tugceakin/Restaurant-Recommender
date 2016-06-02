@@ -1,4 +1,4 @@
-recommenderApp.controller('SignInController', function($scope, config, $http, $cookieStore, $location, authorizationService) {
+recommenderApp.controller('SignInController', function($scope, $rootScope, config, $http, $cookieStore, $location, authorizationService, $auth) {
 
     if($cookieStore.get('isAuth') == true){
         $location.path( "/" );
@@ -27,6 +27,22 @@ recommenderApp.controller('SignInController', function($scope, config, $http, $c
         }, function (response) {
             $location.path("/" + "login");
         });
+    };
+
+    $scope.authenticate = function(provider) {
+      $scope.processing = true;
+
+      $auth.authenticate(provider)
+      .then(function(response) {
+        $scope.processing = false;
+        $cookieStore.put('isAuth', true);
+        $cookieStore.put('user_id', response.data.user_id);
+        $location.path("/activities");
+      })
+      .catch(function(response) {
+        $scope.processing = false;
+        $scope.errorLogin = true;
+      });
     };
 
 

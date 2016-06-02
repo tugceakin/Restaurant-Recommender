@@ -2,9 +2,10 @@
  * Created by tugceakin on 3/13/16.
  */
 
-var recommenderApp = angular.module('recommenderApp', ['chart.js', 'ngRoute', 'ngAnimate', 'uiSwitch','ui.bootstrap', 'angucomplete-alt', 'ngCookies'])
+var recommenderApp = angular.module('recommenderApp', ['chart.js', 'ngRoute', 'ngAnimate', 'uiSwitch','ui.bootstrap', 'angucomplete-alt', 'ngCookies', 'satellizer'])
 
-    .config(function ($routeProvider) {
+    .config(function ($routeProvider, $authProvider) {
+
     $routeProvider.
     when('/', {
         templateUrl: 'activities.html',
@@ -35,4 +36,14 @@ var recommenderApp = angular.module('recommenderApp', ['chart.js', 'ngRoute', 'n
         controller: 'RegistrationController'
     }).
     otherwise({redirectTo: '/'});
+    
+
+    $authProvider.oauth2({
+      name: 'google',
+      url: 'http://127.0.0.1:5000/authgoogle',
+      clientId: '', //Put your client id here,
+      redirectUri: window.location.origin, 
+      authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
+      responseType: 'code'
+    });
 });

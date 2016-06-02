@@ -2,7 +2,7 @@
  * Created by tugceakin on 4/15/16.
  */
 
-recommenderApp.controller('SearchRestaurantController', function($scope, $http, $location, $cookieStore, tableService, restaurantService, config) {
+recommenderApp.controller('SearchRestaurantController', function($scope, $http, $location, $cookieStore, tableService, restaurantService, config, $auth) {
 
 
     if($cookieStore.get('isAuth')){
@@ -70,6 +70,7 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
 
     $scope.rateRestaurant = function(value, r) {
         $scope.rating = value;
+        $scope.user_id = $cookieStore.get("user_id")
         restaurantService.rateRestaurant($scope, r)
         .success(function (data) {
             $scope.restaurants = data;
@@ -82,7 +83,9 @@ recommenderApp.controller('SearchRestaurantController', function($scope, $http, 
     $scope.logout = function() {
         console.log("clicked logout");
         $cookieStore.put('isAuth', false);
+        $auth.logout();
         $location.path("/" + "login");
+
     };
 
 });

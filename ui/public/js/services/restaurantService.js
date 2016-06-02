@@ -18,7 +18,7 @@ recommenderApp.factory('restaurantService', function($http, config) {
                   method: 'POST',
                   url: url,
                   headers: {'Content-Type': 'application/json'},
-                  data: { stars: $scope.rating, user_id: $scope.user_id, business_id: $scope.business_id,
+                  data: { stars: $scope.rating, user_id: $scope.user_id, business_id: r.business_id,
                     latitude: r.latitude, longitude: r.longitude, city: r.city, full_address: r.full_address,
                     categories: r.categories, name: r.name, state: r.state, average_rating: r.stars}
                     

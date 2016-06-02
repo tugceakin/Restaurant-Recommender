@@ -5,8 +5,10 @@
       <input type="text" placeholder="username" ng-model="params.username" required/>
       <input type="password" placeholder="password" ng-model="params.password" require/>
       <button>login</button>
+      <button id="google-login" ng-click="authenticate('google')">Sign in with Google</button>
       <p class="message">Not registered? <a href="#/register">Create an account</a></p>
     </form>
+
     <div ng-show="errorLogin" class="alert alert-danger">Username and password invalid. Please enter correct data!</div>
   </div>
 </div>
