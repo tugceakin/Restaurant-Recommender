@@ -4,13 +4,18 @@ from flask.ext.cors import CORS
 import pymongo 
 import json 
 import re
+import requests
 import datetime
 import string
-import random
+import jwt
+from datetime import datetime, timedelta
 from bson import BSON
 from bson import json_util
 from recommendations import Recommendation
 from database import Database
+from requests_oauthlib import OAuth1
+from jwt import DecodeError, ExpiredSignature
+
 
 d = Database()
 connection = d.getConnection()
@@ -20,7 +25,17 @@ users = db.users
 user_ratings = db.user_ratings
 
 app = Flask(__name__)
+app.config.from_object('config')
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
+def create_token(user_id):
+    payload = {
+        'sub': user_id,
+        'iat': datetime.utcnow(),
+        'exp': datetime.utcnow() + timedelta(days=14)
+    }
+    token = jwt.encode(payload, app.config['TOKEN_SECRET'])
+    return token.decode('unicode_escape')
 
 @app.route('/getRecommendations', methods=['POST'])
 def get_recommendations():
@@ -43,7 +58,7 @@ def rate_restaurant():
     business_ratings = db.business_ratings
     user_ratings = db.user_ratings
     rating_data = json.loads(request.data)
-    rating_data["date"] =  datetime.datetime.now()
+    rating_data["date"] =  datetime.now()
     rating = rating_data["stars"]
     user_id = rating_data["user_id"]
     business_id = rating_data["business_id"]
@@ -110,6 +125,46 @@ def authenticate_user():
     else:
         resp = make_response(json.dumps(["false", 0]))
         return resp
+
+@app.route('/authgoogle', methods=['POST'])
+def authenticate_google_user():
+    print("Auth Service has been called")
+    access_token_url = 'https://accounts.google.com/o/oauth2/token'
+    people_api_url = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect'
+
+    payload = dict(client_id=request.json['clientId'],
+                   redirect_uri=request.json['redirectUri'],
+                   client_secret=app.config['GOOGLE_SECRET'],
+                   code=request.json['code'],
+                   grant_type='authorization_code')
+
+    # Step 1. Exchange authorization code for access token.
+    r = requests.post(access_token_url, data=payload)
+    token = json.loads(r.text)
+    headers = {'Authorization': 'Bearer {0}'.format(token['access_token'])}
+
+    # Step 2. Retrieve information about the current user.
+    r = requests.get(people_api_url, headers=headers)
+    profile = json.loads(r.text)
+    user_id = profile['sub']
+    print(profile)
+    print(profile['email'])
+
+    if users.find({"user_id" : user_id}).count() < 1:
+        print "User doesn't exist" 
+        result = users.insert_one(
+            {
+                "user_id": user_id,
+                "name" : profile['name']
+            }
+        )
+        user_ratings.insert( {"_id": user_id, user_id: {}})
+    else:
+        print 'User exists'
+
+    token = create_token(user_id)
+    return jsonify(token=token, user_id=user_id)
+
 
 @app.route('/registerUser', methods=['POST'])
 def register_user():

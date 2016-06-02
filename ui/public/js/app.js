@@ -41,7 +41,8 @@ var recommenderApp = angular.module('recommenderApp', ['chart.js', 'ngRoute', 'n
     $authProvider.oauth2({
       name: 'google',
       url: 'http://127.0.0.1:5000/authgoogle',
-      clientId: '', //Put your client id here,
+      //clientId: '', //Put your client id here
+      clientId: '442054703779-65no4omgd4kggbfqs827j42lcr5rdgvp.apps.googleusercontent.com',
       redirectUri: window.location.origin, 
       authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
       responseType: 'code'
